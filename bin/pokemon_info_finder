@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/pokemon_info_finder"
+
+PokemonInfoFinder::CLI.new.call
