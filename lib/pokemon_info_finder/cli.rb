@@ -3,7 +3,8 @@ class PokemonInfoFinder::CLI
 
     #call methods in order
     def call
-        Scraper.puts_page
+        get_pokemon
+        menu
     end
 
     #CLI menu options
@@ -67,7 +68,7 @@ class PokemonInfoFinder::CLI
             puts "Please enter name of Pokemon you want more information on, \"back\" to go back:"
             input = gets.strip.downcase
 
-            if @pokemon_full_list.include?(input.capitalize)
+            if input == input
                 pokemon_more_info(input)
             else
                 puts ""
@@ -84,14 +85,14 @@ class PokemonInfoFinder::CLI
     end
 
     #gets list of pokemon of the chosen name 
-    def pokemon_more_info(name)
+    def pokemon_more_info(n)
         #gets list of pokemon of that type
-        puts "more info on #{name}"
+        puts PokemonInfoFinder::n.name
     end
 
     #scrapes bubbapedia's full pokemon list and adds each pokemon to a array 
     def get_pokemon
-        @pokemon_full_list = ["Ditto", "Bulbasaur", "Charmander"] 
+        PokemonInfoFinder::Scraper.scrape_pokemon_name
         #make pokemon class to make new pokemon and give them types and info 
     end
 

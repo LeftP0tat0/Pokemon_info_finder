@@ -3,7 +3,7 @@ class PokemonInfoFinder::Pokemon
 
     @@all = []
 
-    def initalize (name, type_1, type_2 = nil)
+    def initialize (name, type_1, type_2 = nil)
         @name = name
         @type_1 = type_1
         @type_2 = type_2
