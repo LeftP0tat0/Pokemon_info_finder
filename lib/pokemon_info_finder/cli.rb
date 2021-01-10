@@ -68,7 +68,9 @@ class PokemonInfoFinder::CLI
             puts "Please enter name of Pokemon you want more information on, \"back\" to go back:"
             input = gets.strip.downcase
 
-            if input == input
+
+            #gets the name and gives back more information about it
+            if @pokemon_name_list.include?(input)
                 pokemon_more_info(input)
             else
                 puts ""
@@ -80,19 +82,31 @@ class PokemonInfoFinder::CLI
     #gets list of pokemon of the chosen type 
     def pokemon_of_x_type(type)
         #gets list of pokemon of that type
-        puts "list of #{type} pokemon"
+        pokemon_by_type = PokemonInfoFinder::Pokemon.find_by_type(type)
+
+        #shows list of x type pokemon
+        puts ""
+        puts "   Kanto's #{type.capitalize} type Pokemon"
+        puts "---------------------------------"
+        pokemon_by_type.each { |n| puts "           #{n}" }
+        puts "---------------------------------"
+        puts ""
+
+        #moves user to names to ask about specific pokemon
         names
     end
 
     #gets list of pokemon of the chosen name 
-    def pokemon_more_info(n)
+    def pokemon_more_info(name)
         #gets list of pokemon of that type
-        puts PokemonInfoFinder::n.name
+        pokemon_info = PokemonInfoFinder::Pokemon.find_by_name(name)
+        puts pokemon_info
     end
 
     #scrapes bubbapedia's full pokemon list and adds each pokemon to a array 
     def get_pokemon
         PokemonInfoFinder::Scraper.scrape_pokemon_name
+        @pokemon_name_list = PokemonInfoFinder::Pokemon.all_names
         #make pokemon class to make new pokemon and give them types and info 
     end
 
