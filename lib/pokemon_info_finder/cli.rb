@@ -99,8 +99,20 @@ class PokemonInfoFinder::CLI
     #gets list of pokemon of the chosen name 
     def pokemon_more_info(name)
         #gets list of pokemon of that type
-        pokemon_info = PokemonInfoFinder::Pokemon.find_by_name(name)
-        puts pokemon_info
+        pokemon_info = PokemonInfoFinder::Pokemon.get_extra_info(name)
+        
+        puts ""
+        puts "  More information on #{name}"
+        puts "------------------------------------"
+        puts "#{name} is #{pokemon_info[0]} Pokedex"
+        puts "#{name} is known as the #{pokemon_info[1]}"
+        if pokemon_info[3] == ""
+            puts "#{name} is a #{pokemon_info[2]} type pokemon"
+        else
+            puts "#{name} is a #{pokemon_info[2]} and a #{pokemon_info[3]} type pokemon"
+        end
+        puts "------------------------------------"
+
     end
 
     #scrapes bubbapedia's full pokemon list and adds each pokemon to a array 

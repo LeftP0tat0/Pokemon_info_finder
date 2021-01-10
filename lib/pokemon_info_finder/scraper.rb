@@ -43,6 +43,24 @@ class PokemonInfoFinder::Scraper
 
     end
 
+    def self.scrape_pokemon_data(name)
+        pokemon_data = []
+
+        doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{name.name.capitalize}_(Pok%C3%A9mon)"))
+        tables = doc.css("body div#mw-content-text")
+
+        tables.search('tr td tr big big a span').each do |tr|
+            pokemon_data << tr.text
+        end
+
+        the_x_pokemon = []
+        tables.search('tr td tr td tr td a span').each do |tr|
+            the_x_pokemon << tr.text
+        end
+        pokemon_data << the_x_pokemon[0]
+        pokemon_data
+    end
+
 end
 
 
